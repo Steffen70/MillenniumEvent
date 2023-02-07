@@ -7,7 +7,7 @@ Add the following configuration to the appsettings.json or create matching envir
 ```json
 {
     "ApiSettings": {
-      "ConnectionString": "Data source=Demo.db",
+      "ConnectionString": "",
       "TokenKey": "",
       "AdminPassword": "",
       "DemoPassword": ""
