@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@Model.Title</title>
-        <link href="@Href("~/Styles/stylesheet.css")" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
-        @RenderBody()
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.Title</title>
+    @foreach (var style in Model.Styles)
+    {
+        <link href="@Href($"~/Styles/{style}")" rel="stylesheet" type="text/css" />
+    }
+</head>
+<body>
+    @RenderBody()
 
-        @foreach (var script in Model.Scripts)
-        {
-            <script src="@Href($"~/Scripts/{script}")"></script>
-        }
-    </body>
+    @foreach (var script in Model.Scripts)
+    {
+        <script src="@Href($"~/Scripts/{script}")"></script>
+    }
+</body>
 </html>
