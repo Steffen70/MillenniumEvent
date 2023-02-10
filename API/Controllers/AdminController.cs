@@ -31,15 +31,15 @@ namespace API.Controllers
         }
 
         [Authorize(Policy = "RequireAdminRole")]
-        [HttpPut("change-role/{username}")]
-        public async Task<ActionResult> ChangeUserRole([FromRoute] string username, string role)
+        [HttpPut("change-role/{email}")]
+        public async Task<ActionResult> ChangeUserRole([FromRoute] string email, string role)
         {
-            if (User.GetUserName() == username.ToLower())
+            if (User.GetUserName() == email.ToLower())
                 return BadRequest("You can not change your own role");
 
-            var user = await _userRepository.GetUserByUsernameAsync(username);
+            var user = await _userRepository.GetUserByEmailAsync(email);
 
-            if (user is null) return NotFound($"Could not find user with username: '{username}'");
+            if (user is null) return NotFound($"Could not find user with email: '{email}'");
 
             user.UserRole = role;
 

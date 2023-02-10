@@ -55,7 +55,7 @@ namespace API.Services
             using var hmac = new HMACSHA512();
             var admin = new AppUser
             {
-                Username = "admin",
+                Email = _apiSettings.Value.AdminEmail,
                 PasswordHash = hmac.ComputeHash(
                     Encoding.UTF8.GetBytes(_apiSettings.Value.AdminPassword)),
                 PasswordSalt = hmac.Key,
@@ -80,7 +80,7 @@ namespace API.Services
                 using var hmac = new HMACSHA512();
                 _userRepository.AddUser(new AppUser
                 {
-                    Username = r.Username.ToLower(),
+                    Email = r.Email.ToLower(),
                     PasswordHash = hmac.ComputeHash(string.IsNullOrWhiteSpace(r.Password)
                         ? defaultPassword
                         : Encoding.UTF8.GetBytes(r.Password)),

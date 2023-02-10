@@ -19,9 +19,9 @@ namespace API.Data.Repositories
             return _mapper.Map<MemberDto>(user);
         }
 
-        public async Task<MemberDto> GetMemberByUsernameAsync(string username)
+        public async Task<MemberDto> GetMemberByEmailAsync(string email)
         {
-            var user = await UserRepository.GetUserByUsernameAsync(username);
+            var user = await UserRepository.GetUserByEmailAsync(email);
 
             return _mapper.Map<MemberDto>(user);
         }

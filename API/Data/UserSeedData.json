@@ -1,17 +1,13 @@
 [
   {
-    "Username": "Demo"
+    "Email": "demo@example.ch"
   },
   {
-    "Username": "Miro",
+    "Email": "miro444.mz@gmail.com",
     "Password": "Miro"
   },
   {
-    "Username": "Levi",
-    "Password": "Levi"
-  },
-  {
-    "Username": "Dionys",
+    "Email": "steffendionys@gmail.com",
     "Password": "Dionys"
   }
 ]

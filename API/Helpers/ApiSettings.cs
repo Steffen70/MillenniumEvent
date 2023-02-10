@@ -6,6 +6,7 @@ namespace API.Helpers
     {
         public string ConnectionString { get; set; }
         public string TokenKey { get; set; }
+        public string AdminEmail { get; set; }
         public string AdminPassword { get; set; }
         public string DefaultPassword { get; set; }
     }

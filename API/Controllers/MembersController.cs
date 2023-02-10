@@ -43,8 +43,8 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDto>> GetMemberById([FromRoute] int id)
         => await _memberRepository.GetMemberByIdAsync(id);
 
-        [HttpGet("{username}")]
-        public async Task<ActionResult<MemberDto>> GetMemberByUsername([FromRoute] string username)
-        => await _memberRepository.GetMemberByUsernameAsync(username);
+        [HttpGet("{email}")]
+        public async Task<ActionResult<MemberDto>> GetMemberByUsername([FromRoute] string email)
+        => await _memberRepository.GetMemberByEmailAsync(email);
     }
 }

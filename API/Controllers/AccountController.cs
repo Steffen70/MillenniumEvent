@@ -27,14 +27,14 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (await _userRepository.UserExistsAsync(registerDto.Username))
-                return BadRequest("Username is taken");
+            if (await _userRepository.UserExistsAsync(registerDto.Email))
+                return BadRequest("Email is taken");
 
             using (var hmac = new HMACSHA512())
             {
                 var user = _mapper.Map<AppUser>(registerDto);
 
-                user.Username = registerDto.Username.ToLower();
+                user.Email = registerDto.Email.ToLower();
                 user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
                 user.PasswordSalt = hmac.Key;
 
@@ -51,9 +51,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(loginDto.Username);
+            var user = await _userRepository.GetUserByEmailAsync(loginDto.Email);
 
-            if (user is null) return Unauthorized("Invalid username");
+            if (user is null) return Unauthorized("Invalid Email");
 
             using (var hmac = new HMACSHA512(user.PasswordSalt))
             {

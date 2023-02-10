@@ -54,7 +54,7 @@ namespace API
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("https://localhost:4200"));
+                    .WithOrigins("https://localhost/*"));
 
             app.UseAuthentication();
 
@@ -67,7 +67,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapFallbackToController("Index", "Catchall");
+                endpoints.MapFallbackToController("GetView", "Catchall");
             });
         }
     }

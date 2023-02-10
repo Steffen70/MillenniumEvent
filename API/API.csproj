@@ -21,13 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Scripts\Index.js" />
     <None Include="wwwroot\Scripts\_MainScript.js" />
-    <None Include="wwwroot\Styles\stylesheet.css" />
   </ItemGroup>
 
 </Project>

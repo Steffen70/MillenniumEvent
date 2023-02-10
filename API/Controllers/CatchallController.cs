@@ -59,9 +59,9 @@ namespace API.Controllers
 
             // GET: /Catchall/
         [AllowAnonymous]
-        public ActionResult Index(string name = "Index")
+        public ActionResult GetView(string view = "Index")
         {
-            var file = $@"Views\{name}.cshtml";
+            var file = $@"Views\{view}.cshtml";
             var viewExists = Exists(file);
 
             // check if view name requested is not found
@@ -71,9 +71,9 @@ namespace API.Controllers
             // otherwise just return the view
             var viewModel = new
             {
-                Title = name,
-                Scripts = GetFiles(name, new FileType(FileType.JavaScript)),
-                Styles = GetFiles(name, new FileType(FileType.Stylesheet)),
+                Title = view,
+                Scripts = GetFiles(view, new FileType(FileType.JavaScript)),
+                Styles = GetFiles(view, new FileType(FileType.Stylesheet)),
             };
             return View(file, viewModel);
         }

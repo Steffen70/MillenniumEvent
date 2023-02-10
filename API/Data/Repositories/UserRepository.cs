@@ -10,9 +10,9 @@ namespace API.Data.Repositories
 {
     public class UserRepository : BaseRepository
     {
-        public async Task<bool> UserExistsAsync(string username)
+        public async Task<bool> UserExistsAsync(string email)
         {
-            return await _context.Users.AnyAsync(u => u.Username == username.ToLower());
+            return await _context.Users.AnyAsync(u => u.Email == email.ToLower());
         }
 
         public void AddUser(AppUser user)
@@ -35,10 +35,10 @@ namespace API.Data.Repositories
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public async Task<AppUser> GetUserByEmailAsync(string email)
         {
             return await _context.Users
-                .SingleOrDefaultAsync(x => x.Username == username.ToLower());
+                .SingleOrDefaultAsync(x => x.Email == email.ToLower());
         }
 
         public async Task<FilteredList<UserAdminDto>> GetUsersAsync(FiltrationParams filtrationParams)

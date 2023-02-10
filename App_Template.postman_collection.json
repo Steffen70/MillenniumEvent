@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5ba6e8c7-6d5b-4850-a68b-9fe9b986ea17",
+		"_postman_id": "14706a26-c953-40df-8ccd-4330cf635c37",
 		"name": "App_Template",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25310769"
 	},
 	"item": [
 		{
@@ -15,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Test\",\r\n    \"password\": \"Test\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test@test.ch\",\r\n    \"password\": \"Test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,12 +24,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/account/register",
+							"raw": "https://localhost:44354/api/account/register",
 							"protocol": "https",
 							"host": [
 								"localhost"
 							],
-							"port": "5001",
+							"port": "44354",
 							"path": [
 								"api",
 								"account",
@@ -65,7 +66,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Test\",\r\n    \"password\": \"Test\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test@test.ch\",\r\n    \"password\": \"Test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,12 +74,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/account/login",
+							"raw": "https://localhost:44354/api/account/login",
 							"protocol": "https",
 							"host": [
 								"localhost"
 							],
-							"port": "5001",
+							"port": "44354",
 							"path": [
 								"api",
 								"account",
