@@ -30,22 +30,20 @@ namespace API.Controllers
             if (await _userRepository.UserExistsAsync(registerDto.Email))
                 return BadRequest("Email is taken");
 
-            using (var hmac = new HMACSHA512())
-            {
-                var user = _mapper.Map<AppUser>(registerDto);
+            using var hmac = new HMACSHA512();
+            var user = _mapper.Map<AppUser>(registerDto);
 
-                user.Email = registerDto.Email.ToLower();
-                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-                user.PasswordSalt = hmac.Key;
+            user.Email = registerDto.Email.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
 
-                _userRepository.AddUser(user);
+            _userRepository.AddUser(user);
 
-                if (!await _unitOfWork.Complete())
-                    throw new Exception("Registration failed, the user could not be created");
+            if (!await _unitOfWork.Complete())
+                throw new Exception("Registration failed, the user could not be created");
 
-                var userDto = new UserDto { Token = _tokenService.CreateToken(user) };
-                return _mapper.Map(user, userDto);
-            }
+            var userDto = new UserDto { Token = _tokenService.CreateToken(user) };
+            return _mapper.Map(user, userDto);
         }
 
         [HttpPost("login")]

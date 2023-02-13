@@ -13,9 +13,11 @@ function login(userDto) {
     }).then(res => {
         if (userDto.remember_me && res.ok)
             res.json().then(body => {
-                console.log(body);
                 setCurrentUser(body);
                 console.log(getUser());
+
+                const url = window.location.href.split("?")[0] + "?view=WeatherForecast";
+                window.location.href = url;
             });
     });
 }
