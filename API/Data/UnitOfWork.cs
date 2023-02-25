@@ -9,37 +9,35 @@ namespace API.Data
 {
     public class UnitOfWork
     {
-        internal readonly DataContext _context;
-        internal readonly IMapper _mapper;
+        internal readonly DataContext Context;
+        internal readonly IMapper Mapper;
         public UnitOfWork(DataContext context, IMapper mapper)
         {
-            _mapper = mapper;
-            _context = context;
+            Mapper = mapper;
+            Context = context;
         }
 
-        private Dictionary<Type, BaseRepository> _repositories = new Dictionary<Type, BaseRepository>();
+        private readonly Dictionary<Type, BaseRepository> _repositories = new();
         public TRepo GetRepo<TRepo>() where TRepo : BaseRepository, new()
         {
             var repoType = typeof(TRepo);
 
             if (!_repositories.ContainsKey(repoType))
-                _repositories.Add(typeof(TRepo), BaseRepository.CreateRepo<TRepo>(_context, this, _mapper));
+                _repositories.Add(typeof(TRepo), BaseRepository.CreateRepo<TRepo>(Context, this, Mapper));
 
-            var repo = _repositories[repoType] as TRepo;
-
-            if (repo is null)
+            if (_repositories[repoType] is not TRepo repo)
                 throw new Exception($"Failed to instantiate repository: \"{typeof(TRepo)}\"");
 
             return repo;
         }
 
         public async Task<bool> Complete()
-        => await _context.SaveChangesAsync() > 0;
+        => await Context.SaveChangesAsync() > 0;
 
         public bool HasChanges()
-        => _context.ChangeTracker.HasChanges();
+        => Context.ChangeTracker.HasChanges();
 
         public async Task MigrateAsync()
-        => await _context.Database.MigrateAsync();
+        => await Context.Database.MigrateAsync();
     }
 }

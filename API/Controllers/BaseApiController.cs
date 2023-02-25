@@ -12,13 +12,13 @@ namespace API.Controllers
     [Authorize]
     public abstract class BaseApiController : ControllerBase
     {
-        protected readonly IMapper _mapper;
-        protected readonly UnitOfWork _unitOfWork;
+        protected readonly IMapper Mapper;
+        protected readonly UnitOfWork UnitOfWork;
 
-        public BaseApiController(UnitOfWork unitOfWork, IMapper mapper)
+        protected BaseApiController(UnitOfWork unitOfWork, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            UnitOfWork = unitOfWork;
+            Mapper = mapper;
         }
     }
 }

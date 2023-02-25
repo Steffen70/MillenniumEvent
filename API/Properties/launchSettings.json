@@ -3,7 +3,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:44354?view=login",
+      "launchUrl": "https://localhost:44354",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

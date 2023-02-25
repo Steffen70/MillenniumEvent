@@ -31,7 +31,7 @@ namespace API.Controllers
                 return BadRequest("Email is taken");
 
             using var hmac = new HMACSHA512();
-            var user = _mapper.Map<AppUser>(registerDto);
+            var user = Mapper.Map<AppUser>(registerDto);
 
             user.Email = registerDto.Email.ToLower();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
@@ -39,11 +39,11 @@ namespace API.Controllers
 
             _userRepository.AddUser(user);
 
-            if (!await _unitOfWork.Complete())
+            if (!await UnitOfWork.Complete())
                 throw new Exception("Registration failed, the user could not be created");
 
             var userDto = new UserDto { Token = _tokenService.CreateToken(user) };
-            return _mapper.Map(user, userDto);
+            return Mapper.Map(user, userDto);
         }
 
         [HttpPost("login")]
@@ -62,7 +62,7 @@ namespace API.Controllers
             }
 
             var userDto = new UserDto { Token = _tokenService.CreateToken(user) };
-            return _mapper.Map(user, userDto);
+            return Mapper.Map(user, userDto);
         }
     }
 }

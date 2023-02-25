@@ -1,3 +1,4 @@
+using System;
 using API.Data;
 using API.Helpers;
 using API.Services;
@@ -14,6 +15,8 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config, IWebHostEnvironment env, out IOptions<ApiSettings> apiSettings)
         {
+            if (env == null) throw new ArgumentNullException(nameof(env));
+
             services.Configure<ApiSettings>(config.GetSection("ApiSettings"));
 
             services.AddScoped<SeedService>();

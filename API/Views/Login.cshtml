@@ -2,9 +2,8 @@
     Layout = "~/Views/_MainLayout.cshtml";
 }
 
-<div id="flex_box" class="text-center">
+<div id="flex_box" class="text-center py-1">
     <form id="form-signin">
-        <img class="mb-4" src="@Href("~/Images/Millennium.svg")" alt="" width="100%" height="200px">
         <h1 class="h3 mb-3 fw-normal">Melde dich an</h1>
 
         <div class="form-floating">
@@ -22,6 +21,5 @@
             </label>
         </div>
         <button id="login_btn" class="w-100 btn btn-lg btn-primary" type="submit">Anmelden</button>
-        <p class="mt-5 mb-3 text-muted">© @DateTime.Now.Year Dee:wai</p>
     </form>
 </div>

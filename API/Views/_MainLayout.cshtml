@@ -15,13 +15,48 @@
     @foreach (var style in Model.Styles)
     {
         <link href="@Href($"~/Styles/{style}")"
-              rel="stylesheet"
-              type="text/css" />
+          rel="stylesheet"
+          type="text/css" />
     }
 </head>
 
 <body>
-    @RenderBody()
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-md">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link @(@Model.Title == "Register" ? "active" : "")" href="/?view=register">Friendslist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(@Model.Title == "Moonliners" ? "active" : "")" href="/?view=moonliners">Moonliners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(@Model.Title == "Dashboard" ? "active" : "")" href="/?view=dashboard">Dashboard</a>
+                    </li>
+                </ul>
+                <ul class="d-flex nav">
+                    <li class="nav-item"><a href="/?view=login" class="nav-link @(@Model.Title == "Login" ? "link-dark px-2" : "")">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-2 text-center">
+        <a href="/"><img class="d-block mx-auto mb-2" src="@Href("~/Images/Millennium.svg")" width="100%" height="120px"></a>
+    </div>
+
+    <div id="main-scroll-wraper" class="py-4">
+        <div class="container-md" id="main-scroll">
+            @RenderBody()
+        </div>
+    </div>
+
+    <p class="my-3 text-muted text-center">© @DateTime.Now.Year Dee:wai</p>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

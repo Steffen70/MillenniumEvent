@@ -4,7 +4,7 @@ namespace API.Helpers.Filtration
 {
     public class FiltrationParams : IPagination
     {
-        private const int MaxPageSize = 50;
+        private const int MaxPageSize = 100;
         private int _pageSize = 10;
 
         public int CurrentPage { get; set; } = 1;
@@ -14,12 +14,12 @@ namespace API.Helpers.Filtration
             set => _pageSize = value > MaxPageSize ? MaxPageSize : value;
         }
 
-        internal DateTime _timeStamp = DateTime.UtcNow;
+        internal DateTime TimeStamp = DateTime.UtcNow;
 
         public long TimeStampTicks
         {
-            get => _timeStamp.Ticks;
-            set => _timeStamp = new DateTime(value, DateTimeKind.Utc);
+            get => TimeStamp.Ticks;
+            set => TimeStamp = new DateTime(value, DateTimeKind.Utc);
         }
     }
 }

@@ -7,6 +7,7 @@ using API.Extensions;
 using API.Helpers.Filtration;
 using API.Helpers.Filtration.Custom;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -19,6 +20,7 @@ namespace API.Controllers
             _memberRepository = unitOfWork.GetRepo<MemberRepository>();
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetMembers([FromQuery] FiltrationParams filtrationParams)
         {
@@ -29,6 +31,7 @@ namespace API.Controllers
             return membersList.Result;
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("test-filter")]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetTestFilter([FromQuery] TestParams filtrationParams)
         {
@@ -39,12 +42,14 @@ namespace API.Controllers
             return membersList.Result;
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<MemberDto>> GetMemberById([FromRoute] int id)
         => await _memberRepository.GetMemberByIdAsync(id);
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("{email}")]
-        public async Task<ActionResult<MemberDto>> GetMemberByUsername([FromRoute] string email)
+        public async Task<ActionResult<MemberDto>> GetMemberByEmail([FromRoute] string email)
         => await _memberRepository.GetMemberByEmailAsync(email);
     }
 }

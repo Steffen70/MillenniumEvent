@@ -10,10 +10,10 @@ namespace API.Helpers
     {
         private const string IsUtcAnnotation = "IsUtc";
         private static readonly ValueConverter<DateTime, DateTime> UtcConverter =
-          new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+          new(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
         private static readonly ValueConverter<DateTime?, DateTime?> UtcNullableConverter =
-          new ValueConverter<DateTime?, DateTime?>(v => v, v => v == null ? v : DateTime.SpecifyKind(v.Value, DateTimeKind.Utc));
+          new(v => v, v => v == null ? v : DateTime.SpecifyKind(v.Value, DateTimeKind.Utc));
 
         //Mark a property as not UTC: builder.Property(x => x.DateField).IsUtc(false);
         public static PropertyBuilder<TProperty> IsUtc<TProperty>(this PropertyBuilder<TProperty> builder, bool isUtc = true) =>

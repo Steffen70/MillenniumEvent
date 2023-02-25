@@ -45,7 +45,7 @@ namespace API.Controllers
 
             _userRepository.UpdateUser(user);
 
-            if (!await _unitOfWork.Complete()) return BadRequest("Failed to change user role");
+            if (!await UnitOfWork.Complete()) return BadRequest("Failed to change user role");
 
             return Ok(user.UserRole);
         }

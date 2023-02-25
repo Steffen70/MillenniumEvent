@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using API.Extensions;
 using Microsoft.AspNetCore.Hosting;
 
 using static System.IO.File;
@@ -71,7 +72,7 @@ namespace API.Controllers
             // otherwise just return the view
             var viewModel = new
             {
-                Title = view,
+                Title = view.FirstCharToUpper(),
                 Scripts = GetFiles(view, new FileType(FileType.JavaScript)),
                 Styles = GetFiles(view, new FileType(FileType.Stylesheet)),
             };
