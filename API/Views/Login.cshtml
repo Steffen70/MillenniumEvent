@@ -4,7 +4,9 @@
 
 <div id="flex_box" class="text-center py-1">
     <form id="form-signin">
-        <h1 class="h3 mb-3 fw-normal">Melde dich an</h1>
+        <h1 class="h3 mb-3 fw-normal">Promoter Login</h1>
+        
+        <div class="alert alert-warning d-none" role="alert">Email address or password is invalid!</div>
 
         <div class="form-floating">
             <input type="email" name="email" class="form-control" id="floatingInput">
@@ -15,11 +17,6 @@
             <label for="floatingPassword">Passwort</label>
         </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me" name="remember_me"> Login merken
-            </label>
-        </div>
         <button id="login_btn" class="w-100 btn btn-lg btn-primary" type="submit">Anmelden</button>
     </form>
 </div>

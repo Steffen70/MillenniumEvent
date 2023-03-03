@@ -34,11 +34,11 @@ namespace API.Migrations
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("longblob");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext");
 
-                    b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("longblob");
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserRole")
                         .HasColumnType("longtext");

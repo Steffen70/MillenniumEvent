@@ -2,7 +2,6 @@ using System;
 using API.Data;
 using API.Helpers;
 using API.Services;
-using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +21,6 @@ namespace API.Extensions
             services.AddScoped<SeedService>();
 
             services.AddScoped<TokenService>();
-            services.AddScoped<UnitOfWork>();
             services.AddScoped<LogUserActivity>();
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);

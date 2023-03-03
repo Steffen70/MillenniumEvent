@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class MySqlCreate : Migration
+    public partial class CreateMySql : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,8 +25,8 @@ namespace API.Migrations
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     LastActive = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UserRole = table.Column<string>(type: "longtext", nullable: true),
-                    PasswordHash = table.Column<byte[]>(type: "longblob", nullable: true),
-                    PasswordSalt = table.Column<byte[]>(type: "longblob", nullable: true)
+                    PasswordHash = table.Column<string>(type: "longtext", nullable: true),
+                    PasswordSalt = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,3 +1,5 @@
+const alertBox = document.querySelector(".alert-warning");
+
 function setCurrentUser(user) {
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
@@ -11,14 +13,20 @@ function login(userDto) {
         headers: { 'Content-Type': "application/json" },
         body: JSON.stringify(userDto)
     }).then(res => {
-        if (userDto.remember_me && res.ok)
+        console.log(res);
+
+        if (res.ok)
             res.json().then(body => {
                 setCurrentUser(body);
                 console.log(getUser());
 
-                const url = window.location.href.split("?")[0] + "?view=WeatherForecast";
+                const url = window.location.href.split("?")[0] + "?view=Tickets";
                 window.location.href = url;
             });
+
+        else {
+            alertBox.classList.remove("d-none");
+        }
     });
 }
 
@@ -40,4 +48,6 @@ onLoad.push(() => {
         loginBtn.addEventListener("click", () => {
             login(serializeForm(form));
         });
+
+    console.log("successful push onload");
 });

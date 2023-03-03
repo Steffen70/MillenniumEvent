@@ -11,7 +11,7 @@ namespace API.Entities
 
         public string UserRole { get; set; } = "Member";
 
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using API.Extensions;
 using API.Helpers;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace API
 {
@@ -24,7 +25,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationServices(_config, _env, out IOptions<ApiSettings> apiSettings);
+            services.AddApplicationServices(_config, _env, out var apiSettings);
 
             services.AddCors();
 
@@ -49,12 +50,12 @@ namespace API
 
             app.UseRouting();
 
-            if (_env.IsDevelopment())
-                app.UseCors(policy => policy
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials()
-                    .WithOrigins("https://localhost/*"));
+            // if (_env.IsDevelopment())
+            app.UseCors(policy => policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithOrigins(Environment.GetEnvironmentVariable("CORS_ORIGIN") ?? throw new Exception("Set \"CORS_ORIGIN\" environment variable!")));
 
             app.UseAuthentication();
 

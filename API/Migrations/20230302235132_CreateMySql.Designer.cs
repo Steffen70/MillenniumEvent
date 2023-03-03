@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230301204956_MySqlCreate")]
-    partial class MySqlCreate
+    [Migration("20230302235132_CreateMySql")]
+    partial class CreateMySql
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,11 +37,11 @@ namespace API.Migrations
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("longblob");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext");
 
-                    b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("longblob");
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserRole")
                         .HasColumnType("longtext");

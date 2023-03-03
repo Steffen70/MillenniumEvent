@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
@@ -26,7 +25,7 @@ namespace API.Controllers
             public static readonly (string, string) Stylesheet = ("Styles", "css");
 
             private readonly (string, string) _fileType;
-            
+
             public string Folder => _fileType.Item1;
             public string FileExtension => _fileType.Item2;
 
@@ -58,7 +57,7 @@ namespace API.Controllers
             return fileList;
         }
 
-            // GET: /Catchall/
+        // GET: /Catchall/
         [AllowAnonymous]
         public ActionResult GetView(string view = "Index")
         {

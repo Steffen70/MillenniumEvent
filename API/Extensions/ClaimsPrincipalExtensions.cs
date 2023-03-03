@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 
 namespace API.Extensions
@@ -8,6 +9,6 @@ namespace API.Extensions
         => user.FindFirst(ClaimTypes.Name)?.Value.ToLower();
 
         public static int GetUserId(this ClaimsPrincipal user)
-        => int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        => int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new Exception("Can't get UserId from ClaimsPrincipal"));
     }
 }

@@ -1,8 +1,5 @@
-using System;
 using API.DTOs;
 using API.Entities;
-using API.Helpers.Filtration;
-using API.Helpers.Filtration.Custom;
 using AutoMapper;
 
 namespace API.Helpers
@@ -15,12 +12,6 @@ namespace API.Helpers
 
             CreateMap<AppUser, UserDto>();
             CreateMap<AppUser, UserAdminDto>();
-            CreateMap<AppUser, MemberDto>();
-
-            CreateMap<FiltrationParams, FiltrationHeader>();
-            CreateMap(typeof(FilteredList<,>), typeof(FilteredList<>));
-
-            CreateMap<TestParams, TestHeader>();
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using API.Data;
-using API.Data.Repositories;
 using API.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,11 +15,13 @@ namespace API.Helpers
 
             if (resultContext.HttpContext.User.Identity is not { IsAuthenticated: true }) return;
 
-            var unitOfWork = resultContext.HttpContext.RequestServices.GetService<UnitOfWork>();
-            var user = await unitOfWork.GetRepo<UserRepository>().GetUserByIdAsync(resultContext.HttpContext.User.GetUserId());
+            var dataContext = resultContext.HttpContext.RequestServices.GetService<DataContext>();
+
+            var userId = resultContext.HttpContext.User.GetUserId();
+            var user = await dataContext.Users.FindAsync(userId) ?? throw new Exception($"User: \"{userId}\", could not be found!");
 
             user.LastActive = DateTime.UtcNow;
-            await unitOfWork.Complete();
+            await dataContext.SaveChangesAsync();
         }
     }
 }
