@@ -6,11 +6,14 @@ Add the following configuration to the appsettings.json or create matching envir
 
 ```json
 {
-    "ApiSettings": {
-      "ConnectionString": "",
-      "TokenKey": "",
-      "AdminPassword": "",
-      "DemoPassword": ""
-    }
+    "ApiSettings":  {
+        "ConnectionString": MySql_ConnectionString,
+        "AdminEmail": email,
+        "AdminPassword": password,
+        "DefaultPassword": password,
+        "TokenKey": GUID
+  }
 }
 ```
+
+Add **CORS_ORIGIN** = https://localhost/ to your environment variables
