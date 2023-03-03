@@ -42,10 +42,10 @@ namespace API.Controllers
             var reg1 = new Regex(@"^_");
             var reg2 = new Regex($"{viewName}");
 
-            var file = $@"{_environment.WebRootPath}\{fileType.Folder}\{viewName}.{fileType.FileExtension}";
+            var file = Path.Combine(_environment.WebRootPath, fileType.Folder, $"{viewName}.{fileType.FileExtension}");
             var fileExists = Exists(file);
 
-            var fileList = Directory.GetFiles($@"{_environment.WebRootPath}\{fileType.Folder}\", $"*.{fileType.FileExtension}")
+            var fileList = Directory.GetFiles(Path.Combine(_environment.WebRootPath, fileType.Folder), $"*.{fileType.FileExtension}")
                 .Select(Path.GetFileName)
                 .Where(n => n.Contains('_'))
                 .Where(n => reg1.IsMatch(n) || reg2.IsMatch(n))
@@ -61,7 +61,7 @@ namespace API.Controllers
         [AllowAnonymous]
         public ActionResult GetView(string view = "Index")
         {
-            var file = $@"Views\{view}.cshtml";
+            var file = Path.Combine("Views", $"{view}.cshtml");
             var viewExists = Exists(file);
 
             // check if view name requested is not found

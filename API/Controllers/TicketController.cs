@@ -45,7 +45,7 @@ namespace API.Controllers
             Context.Tickets.Add(ticket);
             var logicTicket = Mapper.Map<Logic.Ticket>(ticket);
 
-            var flyer = Image.FromFile($@".\Data\{_apiSettings.Value.FlyerImageName}");
+            var flyer = Image.FromFile(Path.Combine(".", "Data", _apiSettings.Value.FlyerImageName));
             var bitmap = logicTicket.GenerateTicketBitmap(flyer);
             logicTicket.SendViaMail(_service, bitmap);
 
