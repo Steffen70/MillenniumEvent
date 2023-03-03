@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace API.Entities
 {
@@ -13,5 +14,7 @@ namespace API.Entities
 
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
+
+        public List<Ticket> Tickets { get; set; }
     }
 }

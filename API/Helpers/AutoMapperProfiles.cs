@@ -12,6 +12,8 @@ namespace API.Helpers
 
             CreateMap<AppUser, UserDto>();
             CreateMap<AppUser, UserAdminDto>();
+
+            CreateMap<Ticket, Logic.Ticket>();
         }
     }
 }

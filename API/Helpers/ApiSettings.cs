@@ -9,5 +9,9 @@ namespace API.Helpers
         public string AdminEmail { get; set; }
         public string AdminPassword { get; set; }
         public string DefaultPassword { get; set; }
+
+        public string FlyerImageName { get; set; }
+        public string TempFolder { get; set; }
+        public EmailConfiguration EmailConfiguration { get; set; }
     }
 }
