@@ -1,4 +1,4 @@
-# App_Template
+# Millennium Event Ticket Generator Site
 
 ## Config
 
