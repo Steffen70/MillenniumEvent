@@ -7,12 +7,20 @@ Add the following configuration to the appsettings.json or create matching envir
 ```json
 {
     "ApiSettings":  {
-        "ConnectionString": MySql_ConnectionString,
-        "AdminEmail": email,
-        "AdminPassword": password,
-        "DefaultPassword": password,
-        "TokenKey": GUID
-  }
+        "ConnectionString": "MySql_ConnectionString",
+        "AdminEmail": "email",
+        "AdminPassword": "password",
+        "DefaultPassword": "password",
+        "TokenKey": "GUID",
+        "FlyerImageName": "base flyer.png name in data directory",
+        "EmailConfiguration": {
+            "From": "email address",
+            "SmtpServer": "smtp.gmail.com",
+            "Port": 465,
+            "Username": "email address",
+            "Password": "email password"
+        }
+    }
 }
 ```
 
