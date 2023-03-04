@@ -8,15 +8,20 @@ using API.Extensions;
 using Microsoft.AspNetCore.Hosting;
 
 using static System.IO.File;
+using API.Helpers;
+using Microsoft.Extensions.Options;
 
 namespace API.Controllers
 {
     public class CatchallController : Controller
     {
         private readonly IWebHostEnvironment _environment;
-        public CatchallController(IWebHostEnvironment environment)
+        private readonly IOptions<ApiSettings> _apiSettings;
+
+        public CatchallController(IWebHostEnvironment environment, IOptions<ApiSettings> apiSettings)
         {
             _environment = environment;
+            _apiSettings = apiSettings;
         }
 
         public class FileType
@@ -61,8 +66,7 @@ namespace API.Controllers
         [AllowAnonymous]
         public ActionResult GetView(string view = "Index")
         {
-            var file = Path.Combine("Views", $"{view}.cshtml");
-            var viewExists = Exists(file);
+            var viewExists = _apiSettings.Value.Views.Contains(view);
 
             // check if view name requested is not found
             if (!viewExists)
@@ -75,7 +79,7 @@ namespace API.Controllers
                 Scripts = GetFiles(view, new FileType(FileType.JavaScript)),
                 Styles = GetFiles(view, new FileType(FileType.Stylesheet)),
             };
-            return View(file, viewModel);
+            return View(Path.Combine("Views", $"{view}.cshtml"), viewModel);
         }
     }
 }

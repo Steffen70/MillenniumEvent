@@ -43,7 +43,7 @@ namespace API.Extensions
 
             var settings = apiSettings;
             services.AddDbContext<DataContext>(options =>
-                options.UseMySQL(settings.Value.ConnectionString));
+                options.UseNpgsql(settings.Value.ConnectionString));
 
             return services;
         }

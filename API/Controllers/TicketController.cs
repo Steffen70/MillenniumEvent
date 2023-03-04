@@ -41,7 +41,6 @@ namespace API.Controllers
 
             var ticket = new Ticket(User.GetUserId(), email);
 
-            Context.Tickets.Add(ticket);
             var logicTicket = Mapper.Map<Logic.Ticket>(ticket);
 
             await using var fs = System.IO.File.OpenRead(Path.Combine("Data", _apiSettings.Value.FlyerImageName));
@@ -50,6 +49,7 @@ namespace API.Controllers
             var image = logicTicket.GenerateTicketBitmap(flyer);
             logicTicket.SendViaMail(_service, image);
 
+            Context.Tickets.Add(ticket);
             await Context.SaveChangesAsync();
 
             return StatusCode(201);

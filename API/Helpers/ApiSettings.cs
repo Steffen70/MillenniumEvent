@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 
 namespace API.Helpers
@@ -13,5 +14,7 @@ namespace API.Helpers
         public string FlyerImageName { get; set; }
         public string TempFolder { get; set; }
         public EmailConfiguration EmailConfiguration { get; set; }
+
+        public List<string> Views { get; set; }
     }
 }
