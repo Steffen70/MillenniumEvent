@@ -8,7 +8,7 @@ namespace API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("Api/[controller]")]
     [Authorize]
     public abstract class BaseApiController : ControllerBase
     {

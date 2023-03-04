@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Drawing;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,6 +11,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using SkiaSharp;
 
 namespace API.Controllers
 {
@@ -23,7 +21,8 @@ namespace API.Controllers
         private readonly IOptions<ApiSettings> _apiSettings;
         private readonly EmailService _service;
 
-        public TicketController(DataContext context, IMapper mapper, IOptions<ApiSettings> apiSettings, EmailService service) : base(context, mapper)
+        public TicketController(DataContext context, IMapper mapper, IOptions<ApiSettings> apiSettings,
+            EmailService service) : base(context, mapper)
         {
             _apiSettings = apiSettings;
             _service = service;
@@ -45,9 +44,11 @@ namespace API.Controllers
             Context.Tickets.Add(ticket);
             var logicTicket = Mapper.Map<Logic.Ticket>(ticket);
 
-            var flyer = Image.FromFile(Path.Combine(".", "Data", _apiSettings.Value.FlyerImageName));
-            var bitmap = logicTicket.GenerateTicketBitmap(flyer);
-            logicTicket.SendViaMail(_service, bitmap);
+            await using var fs = System.IO.File.OpenRead(Path.Combine("Data", _apiSettings.Value.FlyerImageName));
+            var flyer = SKBitmap.Decode(fs);
+
+            var image = logicTicket.GenerateTicketBitmap(flyer);
+            logicTicket.SendViaMail(_service, image);
 
             await Context.SaveChangesAsync();
 

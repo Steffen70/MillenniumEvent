@@ -17,7 +17,7 @@ function send(email) {
     console.log(token);
 
 
-    window.fetch("/api/ticket/send?email=" + email, {
+    window.fetch("/Api/Ticket/Send?email=" + email, {
         method: "POST",
         headers: { "Authorization": "Bearer " + token }
     }).then(res => {

@@ -8,7 +8,7 @@ function setCurrentUser(user) {
 }
 
 function login(userDto) {
-    window.fetch("/api/account/login", {
+    window.fetch("/Api/Account/Login", {
         method: "POST",
         headers: { 'Content-Type': "application/json" },
         body: JSON.stringify(userDto)

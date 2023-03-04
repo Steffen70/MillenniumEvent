@@ -1,44 +1,47 @@
 ﻿using System;
-using System.Drawing;
+using SkiaSharp;
 using System.IO;
 using API.Services;
 using MimeKit;
-using Spire.Barcode;
+using ZXing;
+using ZXing.Common;
+using ZXing.SkiaSharp;
 
 namespace API.Logic
 {
     public class Ticket : Entities.Ticket
     {
-        public Bitmap GenerateTicketBitmap(Image flyer)
+        public SKImage GenerateTicketBitmap(SKBitmap flyer)
         {
-            var bs = new BarcodeSettings
+            var writer = new BarcodeWriter
             {
-                Type = BarCodeType.Code39,
-                Data = ToString()
+                Format = BarcodeFormat.CODE_39,
+                Options = new EncodingOptions {
+                    Height = 400,
+                    Width = 800,
+                    PureBarcode = false,
+                    Margin = 10
+                }
             };
 
-            var bg = new BarCodeGenerator(bs);
-            var barcode = bg.GenerateImage();
-
-
-            //Combine flyer and generated barcode
-
+            var barcode = writer.Write(ToString());
             var flyerHeight = (int)Math.Round((double)flyer.Height / flyer.Width * barcode.Width, MidpointRounding.AwayFromZero);
 
-            var bitmapImage = new Bitmap(barcode.Width, barcode.Height + flyerHeight);
+            var bitmapImage = new SKBitmap(barcode.Width, barcode.Height + flyerHeight);
 
-            using var g = Graphics.FromImage(bitmapImage);
+            using var g = new SKCanvas(bitmapImage);
 
-            g.DrawImage(flyer, 0, 0, barcode.Width, flyerHeight);
-            g.DrawImage(barcode, 0, flyerHeight);
+            //g.DrawImage(SKImage.FromBitmap(flyer), 0, 0, barcode.Width, flyerHeight);
+            g.DrawImage(SKImage.FromBitmap(flyer),0, 0);
+            g.DrawImage(SKImage.FromBitmap(barcode), 0, flyerHeight);
 
-            return bitmapImage;
+            return SKImage.FromBitmap(bitmapImage);
         }
 
-        public void SendViaMail(EmailService service, Bitmap bitmap)
+        public void SendViaMail(EmailService service, SKImage image)
         {
-            using var ms = new MemoryStream();
-            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+            using var ms = new MemoryStream(data.ToArray());
 
             var builder = new BodyBuilder
             {

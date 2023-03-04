@@ -22,7 +22,7 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await Context.Users

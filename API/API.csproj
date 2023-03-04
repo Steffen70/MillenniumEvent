@@ -22,10 +22,12 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.10" />
+		<PackageReference Include="SkiaSharp" Version="2.88.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
-		<PackageReference Include="FreeSpire.Barcode" Version="6.6.0" />
 		<PackageReference Include="NETCore.MailKit" Version="2.1.0" />
+		<PackageReference Include="ZXing.Net" Version="0.16.9" />
+		<PackageReference Include="ZXing.Net.Bindings.SkiaSharp" Version="0.16.13" />
 	</ItemGroup>
 
 	<ItemGroup>
