@@ -41,10 +41,7 @@ namespace API.Logic
 
             var anz = (int)Math.Ceiling((double)width / qrcode.Width);
 
-            for (var i = 0; i < anz; i++)
-            {
-                g.DrawImage(SKImage.FromBitmap(qrcode), i * qrcode.Width, flyerHeight);
-            }
+            for (var i = 0; i < anz; i++) g.DrawImage(SKImage.FromBitmap(qrcode), i * qrcode.Width, flyerHeight);
 
 
             return SKImage.FromBitmap(bitmapImage);
