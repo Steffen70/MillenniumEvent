@@ -45,7 +45,7 @@ namespace API.Controllers
             var logicTicket = Mapper.Map<Logic.Ticket>(ticket);
 
             await using var fs = System.IO.File.OpenRead(Path.Combine("Data", _apiSettings.Value.FlyerImageName));
-            var flyer = SKBitmap.Decode(fs);
+            using var flyer = SKBitmap.Decode(fs);
 
             var image = logicTicket.GenerateTicketBitmap(flyer);
             logicTicket.SendViaMail(_service, image);

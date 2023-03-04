@@ -15,25 +15,37 @@ namespace API.Logic
         {
             var writer = new BarcodeWriter
             {
-                Format = BarcodeFormat.CODE_39,
-                Options = new EncodingOptions {
-                    Height = 400,
-                    Width = 800,
+                Format = BarcodeFormat.QR_CODE,
+                Options = new EncodingOptions
+                {
+                    Height = 200,
+                    Width = 200,
                     PureBarcode = false,
-                    Margin = 10
+                    NoPadding = true
                 }
             };
 
-            var barcode = writer.Write(ToString());
-            var flyerHeight = (int)Math.Round((double)flyer.Height / flyer.Width * barcode.Width, MidpointRounding.AwayFromZero);
+            using var qrcode = writer.Write(ToString());
+            const int width = 1000;
 
-            var bitmapImage = new SKBitmap(barcode.Width, barcode.Height + flyerHeight);
+            var flyerHeight = (int)Math.Round((double)flyer.Height / flyer.Width * width, MidpointRounding.AwayFromZero);
 
+            using var bitmapImage = new SKBitmap(width, qrcode.Height + flyerHeight);
             using var g = new SKCanvas(bitmapImage);
 
-            //g.DrawImage(SKImage.FromBitmap(flyer), 0, 0, barcode.Width, flyerHeight);
-            g.DrawImage(SKImage.FromBitmap(flyer),0, 0);
-            g.DrawImage(SKImage.FromBitmap(barcode), 0, flyerHeight);
+            using var scaledBitmap =
+                flyer.Resize(new SKImageInfo(width, flyerHeight), SKFilterQuality.High);
+
+
+            g.DrawImage(SKImage.FromBitmap(scaledBitmap), 0, 0);
+
+            var anz = (int)Math.Ceiling((double)width / qrcode.Width);
+
+            for (var i = 0; i < anz; i++)
+            {
+                g.DrawImage(SKImage.FromBitmap(qrcode), i * qrcode.Width, flyerHeight);
+            }
+
 
             return SKImage.FromBitmap(bitmapImage);
         }
@@ -45,10 +57,10 @@ namespace API.Logic
 
             var builder = new BodyBuilder
             {
-                HtmlBody = $"<p>Dein Millennium Event Ticket</p><img src=\"cid:{TicketKey}\"/>"
+                HtmlBody = $"<p>Dein Millennium Event Ticket</p><img src=\"cid:{TicketKey}\" width=\"350\"/>"
             };
 
-            var att = new MimePart()
+            var att = new MimePart
             {
                 Content = new MimeContent(ms),
                 ContentDisposition = new ContentDisposition(ContentDisposition.Inline),
