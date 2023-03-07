@@ -40,8 +40,8 @@ namespace API.Controllers
             if (!regex.Match(email).Success)
                 return BadRequest();
 
-            if (Context.Tickets.Any(t => t.Email == email))
-                return StatusCode(208);
+            // if (Context.Tickets.Any(t => t.Email == email))
+            //     return StatusCode(208);
 
             var ticket = new Ticket(User.GetUserId(), email);
 
@@ -67,14 +67,24 @@ namespace API.Controllers
             }
 
             return StatusCode(201);
-
         }
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("List")]
         public async Task<ActionResult<IQueryable<TicketDto>>> List()
         {
-            var list = await Context.Tickets.Select(t => new TicketDto { TicketEmail = t.Email, PromoterEmail = t.AppUser.Email }).ToListAsync();
+            var list = await Context.Tickets
+                .GroupBy(t => new
+                {
+                    Ticket = t.Email,
+                    Promoter = t.AppUser.Email
+                })
+                .Select(t => new TicketDto
+                {
+                    TicketEmail = t.Key.Ticket,
+                    PromoterEmail = t.Key.Promoter,
+                    TicketCount = t.Count()
+                }).ToListAsync();
             return Ok(list);
         }
     }

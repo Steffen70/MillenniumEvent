@@ -105,6 +105,7 @@ onLoad.push(() => {
 
                         trNew.querySelector(".ticket-mail").innerText = t.ticketEmail;
                         trNew.querySelector(".promoter-mail").innerText = t.promoterEmail;
+                        trNew.querySelector(".ticket-count").innerText = t.ticketCount;
 
                         parentNode.appendChild(trNew);
                     });

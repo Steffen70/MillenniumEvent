@@ -10,7 +10,7 @@ function truncateString(str, num) {
     }
 }
 
-function send(email) {
+function send(email, sendBtn) {
     const user = getUser();
     const token = user.token;
 
@@ -19,21 +19,17 @@ function send(email) {
 
     window.fetch("/Api/Ticket/Send?email=" + email, {
         method: "POST",
-        headers: { "Authorization": "Bearer " + token }
+        headers: {"Authorization": "Bearer " + token}
     }).then(res => {
         console.log(res);
 
         if (res.status === 400) {
             alertBox.innerHTML = "Email address is <strong>invalid</strong>!";
             alertBox.classList.remove("d-none");
-        }
-
-        else if (res.status === 208) {
+        } else if (res.status === 208) {
             alertBox.innerHTML = "Ticket <strong>already</strong> sent to this address!";
             alertBox.classList.remove("d-none");
-        }
-
-        else if (res.ok) {
+        } else if (res.ok) {
             clearInput();
 
             const node = successBox.cloneNode(true);
@@ -45,12 +41,12 @@ function send(email) {
             node.innerHTML = `sent to <strong>${limitL}</strong>  ${node.innerHTML}`;
 
             successBox.parentNode.insertBefore(node, successBox.nextSibling);
-        }
-
-        else {
+        } else {
             alertBox.innerHTML = res.statusText;
             alertBox.classList.remove("d-none");
         }
+
+        sendBtn.disabled = false;
     });
 }
 
@@ -84,6 +80,7 @@ onLoad.push(() => {
 
     if (sendBtn)
         sendBtn.addEventListener("click", () => {
-            send(serializeForm(form).email);
+            sendBtn.disabled = true;
+            send(serializeForm(form).email, sendBtn);
         });
 });
