@@ -19,6 +19,19 @@ Add the following configuration to the appsettings.json or create matching envir
             "Port": 465,
             "Username": "email address",
             "Password": "email password"
+        },
+        "Views": [
+            "Index",
+            "Login",
+            "Tickets",
+            "Impressum",
+            "Dashboard"
+        ]
+    },
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
         }
     }
 }
