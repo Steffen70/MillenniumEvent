@@ -4,10 +4,10 @@
 
 <div id="flex_box" class="text-center py-1">
     <form id="form-send-ticket">
-        <h1 class="h3 mb-3 fw-normal">Ticket Versand</h1>
-        
+        <h1 class="h3 mb-3 fw-normal">Promoter erstellen</h1>
+
         <div class="alert alert-warning d-none" role="alert"></div>
-        
+
         <div class="alert alert-success alert-dismissible fade show d-none text-nowrap" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -17,6 +17,26 @@
             <label for="floatingInput">Email Adresse</label>
         </div>
 
-        <button id="send_btn" class="w-100 btn btn-lg btn-primary" type="submit">senden</button>
+        <button id="create_btn" class="w-100 btn btn-lg btn-primary" type="submit">erstellen</button>
     </form>
+
 </div>
+
+<h1 class="h3 mb-3 fw-normal text-center">Tickets</h1>
+
+<table class="table py-2 d-none" id="tickets-table">
+    <thead>
+        <tr>
+            <th scope="col">Ticket Mail</th>
+            <th scope="col">Promoter Mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="d-none table-row">
+            <td class="ticket-mail"></td>
+            <td class="promoter-mail"></td>
+        </tr>
+    </tbody>
+</table>
+
+

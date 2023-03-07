@@ -1,8 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
@@ -10,6 +13,7 @@ using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SkiaSharp;
 
@@ -41,18 +45,37 @@ namespace API.Controllers
 
             var ticket = new Ticket(User.GetUserId(), email);
 
-            var logicTicket = Mapper.Map<Logic.Ticket>(ticket);
-
-            await using var fs = System.IO.File.OpenRead(Path.Combine("Data", _apiSettings.Value.FlyerImageName));
-            using var flyer = SKBitmap.Decode(fs);
-
-            var image = logicTicket.GenerateTicketBitmap(flyer);
-            logicTicket.SendViaMail(_service, image);
-
             Context.Tickets.Add(ticket);
-            await Context.SaveChangesAsync();
+            Context.SaveChanges();
+
+            try
+            {
+                var logicTicket = Mapper.Map<Logic.Ticket>(ticket);
+
+                await using var fs = System.IO.File.OpenRead(Path.Combine("Data", _apiSettings.Value.FlyerImageName));
+                using var flyer = SKBitmap.Decode(fs);
+
+                var image = logicTicket.GenerateTicketBitmap(flyer);
+                logicTicket.SendViaMail(_service, image);
+            }
+            catch
+            {
+                Context.Tickets.Remove(ticket);
+                await Context.SaveChangesAsync();
+
+                throw;
+            }
 
             return StatusCode(201);
+
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("List")]
+        public async Task<ActionResult<IQueryable<TicketDto>>> List()
+        {
+            var list = await Context.Tickets.Select(t => new TicketDto { TicketEmail = t.Email, PromoterEmail = t.AppUser.Email }).ToListAsync();
+            return Ok(list);
         }
     }
 }
