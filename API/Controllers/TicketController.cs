@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -86,6 +85,23 @@ namespace API.Controllers
                     TicketCount = t.Count()
                 }).ToListAsync();
             return Ok(list);
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPut("Redeem")]
+        public ActionResult<string> Redeem([FromQuery] Guid ticketKey)
+        {
+            var ticket = Context.Tickets.FirstOrDefault(t => t.TicketKey == ticketKey);
+
+            if (ticket == null) return NotFound();
+
+            if (ticket.Redeemed != null) return StatusCode(208); //ticket is redeemed
+
+            ticket.Redeemed = DateTime.UtcNow;
+
+            Context.SaveChanges();
+
+            return Ok(ticket.Email);
         }
     }
 }

@@ -2,14 +2,6 @@ const alertBox = document.querySelector(".alert-warning");
 
 const successBox = document.querySelector(".alert-success.d-none");
 
-function truncateString(str, num) {
-    if (str.length > num) {
-        return str.slice(0, num) + "...";
-    } else {
-        return str;
-    }
-}
-
 function send(email, sendBtn) {
     const user = getUser();
     const token = user.token;
@@ -60,10 +52,7 @@ function clearInput() {
 }
 
 onLoad.push(() => {
-    if (getUser() === null) {
-        const url = window.location.href.split("?")[0] + "?view=Login";
-        window.location.href = url;
-    }
+    redirectIfRoleIsMissing(["Promoter", "Admin"]);
 
     //Get form element
     const form = document.getElementById("form-send-ticket");

@@ -58,11 +58,7 @@ function clearInput() {
 }
 
 onLoad.push(() => {
-    let currentUser = getUser();
-    if (currentUser === null || currentUser === undefined || currentUser.userRole !== "Admin") {
-        const url = window.location.href.split("?")[0] + "?view=Login";
-        window.location.href = url;
-    }
+    redirectIfRoleIsMissing(["Admin"]);
 
     //Get form element
     const form = document.getElementById("form-send-ticket");
@@ -98,6 +94,8 @@ onLoad.push(() => {
                     const tableRow = document.querySelector(".table-row");
                     const parentNode = tableRow.parentNode;
 
+                    let ticketCount = 0;
+
                     ticketList.forEach(t => {
                         const trNew = tableRow.cloneNode(true);
 
@@ -107,8 +105,14 @@ onLoad.push(() => {
                         trNew.querySelector(".promoter-mail").innerText = t.promoterEmail;
                         trNew.querySelector(".ticket-count").innerText = t.ticketCount;
 
-                        parentNode.appendChild(trNew);
+                        ticketCount += t.ticketCount;
+
+                        parentNode.insertBefore(trNew, tableRow.nextSibling);
                     });
+
+                    const ticketSum = document.querySelector(".ticket-sum");
+
+                    ticketSum.innerHTML = `<b>${ticketCount}</b>`;
 
                     document.querySelector("#tickets-table").classList.remove("d-none");
                 });

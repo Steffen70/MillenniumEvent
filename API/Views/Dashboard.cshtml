@@ -2,8 +2,8 @@
     Layout = "~/Views/_MainLayout.cshtml";
 }
 
-<div id="flex_box" class="text-center py-1">
-    <form id="form-send-ticket">
+<div id="flex_box" class="text-center d-none">
+    <form id="form-send-ticket" class="mb-3">
         <h1 class="h3 mb-3 fw-normal">Promoter erstellen</h1>
 
         <div class="alert alert-warning d-none" role="alert"></div>
@@ -19,10 +19,7 @@
 
         <button id="create_btn" class="w-100 btn btn-lg btn-primary" type="submit">erstellen</button>
     </form>
-
 </div>
-
-<h1 class="h3 mb-3 fw-normal text-center">Tickets</h1>
 
 <table class="table py-2 d-none" id="tickets-table">
     <thead>
@@ -37,6 +34,12 @@
             <td class="ticket-mail"></td>
             <td class="promoter-mail"></td>
             <td class="ticket-count"></td>
+        </tr>
+
+        <tr>
+            <td><b>Summe</b></td>
+            <td></td>
+            <td class="ticket-sum"></td>
         </tr>
     </tbody>
 </table>
