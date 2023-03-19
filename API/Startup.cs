@@ -34,23 +34,13 @@ namespace API
             services.AddControllers();
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
-
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMiddleware<ExceptionMiddleware>();
-
-            //app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            // if (_env.IsDevelopment())
             app.UseCors(policy => policy
                 .AllowAnyHeader()
                 .AllowAnyMethod()

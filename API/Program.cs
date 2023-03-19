@@ -18,6 +18,7 @@ namespace API
                 var services = scope.ServiceProvider;
                 try
                 {
+                    await services.GetRequiredService<ViewListService>().CacheViewNames();
                     await services.GetRequiredService<SeedService>().SeedData();
                 }
                 catch (Exception ex)

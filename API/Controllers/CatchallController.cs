@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using API.Extensions;
 using Microsoft.AspNetCore.Hosting;
 
 using static System.IO.File;
 using API.Helpers;
 using Microsoft.Extensions.Options;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -17,27 +19,13 @@ namespace API.Controllers
     {
         private readonly IWebHostEnvironment _environment;
         private readonly IOptions<ApiSettings> _apiSettings;
+        private readonly ViewListService _viewListService;
 
-        public CatchallController(IWebHostEnvironment environment, IOptions<ApiSettings> apiSettings)
+        public CatchallController(IWebHostEnvironment environment, IOptions<ApiSettings> apiSettings, ViewListService viewListService)
         {
             _environment = environment;
             _apiSettings = apiSettings;
-        }
-
-        public class FileType
-        {
-            public static readonly (string, string) JavaScript = ("Scripts", "js");
-            public static readonly (string, string) Stylesheet = ("Styles", "css");
-
-            private readonly (string, string) _fileType;
-
-            public string Folder => _fileType.Item1;
-            public string FileExtension => _fileType.Item2;
-
-            public FileType((string, string) fileType)
-            {
-                _fileType = fileType;
-            }
+            _viewListService = viewListService;
         }
 
         private IList<string> GetFiles(string viewName, FileType fileType)
@@ -64,9 +52,9 @@ namespace API.Controllers
 
         // GET: /Catchall/
         [AllowAnonymous]
-        public ActionResult GetView(string view = "Index")
+        public async Task<ActionResult> GetView(string view = "Index")
         {
-            var viewExists = _apiSettings.Value.Views.Contains(view);
+            var viewExists = (await _viewListService.GetViewNames()).Contains(view);
 
             // check if view name requested is not found
             if (!viewExists)
@@ -79,7 +67,9 @@ namespace API.Controllers
                 Scripts = GetFiles(view, new FileType(FileType.JavaScript)),
                 Styles = GetFiles(view, new FileType(FileType.Stylesheet)),
             };
-            return View(Path.Combine("Views", $"{view}.cshtml"), viewModel);
+
+            var razorFileType = new FileType(FileType.RazorPage);
+            return View(Path.Combine(razorFileType.Folder, $"{view}.{razorFileType.FileExtension}"), viewModel);
         }
     }
 }

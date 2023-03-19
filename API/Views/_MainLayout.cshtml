@@ -7,6 +7,8 @@
           content="width=device-width, initial-scale=1">
     <title>@Model.Title</title>
 
+    @*<script src="https://unpkg.com/petite-vue" defer init></script>*@
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -16,59 +18,53 @@
     {
         <link href="@Href($"~/Styles/{style}")"
               rel="stylesheet"
-              type="text/css"/>
+              type="text/css" />
     }
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-md">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link @(@Model.Title == "Impressum" ? "active" : "")" href="/?view=Impressum">Impressum</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(@Model.Title == "Tickets" ? "active" : "")" href="/?view=Tickets">Tickets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(@Model.Title == "Dashboard" ? "active" : "")" href="/?view=Dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link @(@Model.Title == "Scanner" ? "active" : "")" href="/?view=Scanner">Scanner</a>
-                </li>
-            </ul>
-            <ul class="d-flex nav">
-                <li class="nav-item">
-                    <a href="/?view=Login" class="nav-link @(@Model.Title == "Login" ? "link-dark px-2" : "")">Login</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-md">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @foreach (var viewName in new string[] { "Impressum", "Tickets", "Dashboard", "Scanner" })
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @(@Model.Title == @viewName ? "active" : "")" href="/?view=@viewName">@viewName</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="d-flex nav">
+                    <li class="nav-item">
+                        <a href="/?view=Login" class="nav-link @(@Model.Title == "Login" ? "link-dark px-2" : "")">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-2 text-center">
+        <a href="/">
+            <img class="d-block mx-auto mb-2" src="@Href("~/Images/millennium.svg")" width="100%" height="120px">
+        </a>
+    </div>
+
+    <div id="main-scroll-wraper" class="py-4">
+        <div class="container-md" id="main-scroll">
+            @RenderBody()
         </div>
     </div>
-</nav>
-
-<div class="pt-2 text-center">
-    <a href="/">
-        <img class="d-block mx-auto mb-2" src="@Href("~/Images/millennium.svg")" width="100%" height="120px">
-    </a>
-</div>
-
-<div id="main-scroll-wraper" class="py-4">
-    <div class="container-md" id="main-scroll">
-        @RenderBody()
-    </div>
-</div>
 
 
-<script crossorigin="anonymous" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-@foreach (var script in Model.Scripts)
-{
-    <script src="@Href($"~/Scripts/{script}")"></script>
-}
+    @foreach (var script in Model.Scripts)
+    {
+        <script src="@Href($"~/Scripts/{script}")"></script>
+    }
 </body>
 
 </html>

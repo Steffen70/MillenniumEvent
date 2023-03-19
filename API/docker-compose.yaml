@@ -16,7 +16,6 @@ services:
     environment:
         - APPSETTINGS="Data/appsettings.json"
         - CORS_ORIGIN="https://localhost/"
-        #- ApiSettings__ConnectionString="Host=db_postgres;Port=5432;Database=millenniumdb;Username=postgres;Password=postgres"
 
 networks:
   default_network:

@@ -18,6 +18,7 @@ namespace API.Extensions
 
             services.Configure<ApiSettings>(config.GetSection("ApiSettings"));
 
+            services.AddScoped<ViewListService>();
             services.AddScoped<SeedService>();
 
             services.AddScoped<TokenService>();

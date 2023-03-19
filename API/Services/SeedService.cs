@@ -66,7 +66,7 @@ namespace API.Services
 
         private async Task SeedUsersAsync()
         {
-            var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
+            var userData = await File.ReadAllTextAsync(Path.Combine(".", "Data", "UserSeedData.json"));
             var registerDtos = JsonSerializer.Deserialize<List<RegisterDto>>(userData);
 
             if (registerDtos == null) return;
