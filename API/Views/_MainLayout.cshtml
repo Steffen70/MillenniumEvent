@@ -61,7 +61,7 @@
 
     @foreach (var script in Model.Scripts)
     {
-        <script src="@Href($"~/Scripts/{script}")" type="module"></script>
+        <script src="@Href($"~/Scripts/{script}")" @(script.Contains("module") ? Html.Raw("type = \"module\"") : "")></script>
     }
 </body>
 

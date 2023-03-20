@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="wwwroot\Scripts\demo.js" />
+	  <Content Remove="wwwroot\Scripts\demo_module.js" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -41,7 +41,7 @@
 		<None Include="Data\ViewNames.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="wwwroot\Scripts\demo.js">
+		<None Include="wwwroot\Scripts\demo_module.js">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Include="wwwroot\Scripts\_MainScript.js">

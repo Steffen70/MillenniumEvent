@@ -1,10 +1,6 @@
 import { createApp } from "https://unpkg.com/petite-vue?module"
 
-async function sayHello(name) {
-
-}
-
-function helloApp(props) {
+function helloApp() {
     return {
         get helloMuhammad() {
             return "Hello Muhammad";
