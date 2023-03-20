@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/_MainLayout.cshtml";
+}
+
+<div id="counter">
+    <div v-scope="Counter({ initialCount: 1 })" @@vue:mounted="mounted">
+        <p>{{ count }}</p>
+        <button @@click="inc">increment</button>
+    </div>
+
+    <div v-scope="Counter({ initialCount: 2 })">
+        <p>{{ count }}</p>
+        <button @@click="inc">increment</button>
+    </div>
+</div>

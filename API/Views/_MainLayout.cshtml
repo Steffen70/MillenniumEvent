@@ -7,8 +7,6 @@
           content="width=device-width, initial-scale=1">
     <title>@Model.Title</title>
 
-    @*<script src="https://unpkg.com/petite-vue" defer init></script>*@
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -30,7 +28,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @foreach (var viewName in new string[] { "Impressum", "Tickets", "Dashboard", "Scanner" })
+                    @foreach (var viewName in new string[] { "Impressum", "Tickets", "Dashboard", "Scanner", "Demo" })
                     {
                         <li class="nav-item">
                             <a class="nav-link @(@Model.Title == @viewName ? "active" : "")" href="/?view=@viewName">@viewName</a>
@@ -63,7 +61,7 @@
 
     @foreach (var script in Model.Scripts)
     {
-        <script src="@Href($"~/Scripts/{script}")"></script>
+        <script src="@Href($"~/Scripts/{script}")" type="module"></script>
     }
 </body>
 
