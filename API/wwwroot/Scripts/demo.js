@@ -1,17 +1,23 @@
-import { createApp } from 'https://unpkg.com/petite-vue?module'
+import { createApp } from "https://unpkg.com/petite-vue?module"
 
-function Counter(props) {
+async function sayHello(name) {
+
+}
+
+function helloApp(props) {
     return {
-        count: props.initialCount,
-        inc() {
-            this.count++;
+        get helloMuhammad() {
+            return "Hello Muhammad";
         },
-        mounted() {
-            console.log("I'm mounted!");
+        helloWorld: "",
+        async sayHelloWorld() {
+            const reHello = await fetch("/api/Demo/HelloWorld?name=World");
+            if (reHello.ok)
+                this.helloWorld = await reHello.text();
         }
     }
 }
 
 createApp({
-    Counter
-}).mount("#counter")
+    HelloApp: helloApp
+}).mount("#hello-app")
