@@ -19,22 +19,9 @@ Add the following configuration to the appsettings.json or create matching envir
             "Port": 465,
             "Username": "email address",
             "Password": "email password"
-        },
-        "Views": [
-            "Index",
-            "Login",
-            "Tickets",
-            "Impressum",
-            "Dashboard"
-        ]
-    },
-    "Logging": {
-        "LogLevel": {
-            "Default": "Information",
-            "Microsoft.AspNetCore": "Warning"
         }
     }
 }
 ```
 
-Add **CORS_ORIGIN** = https://localhost/ to your environment variables
+Add **CORS_ORIGIN** = ```https://localhost/``` and **APPSETTINGS** = ```Data/appsettings.json``` to your environment variables
