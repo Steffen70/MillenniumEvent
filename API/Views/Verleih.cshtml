@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/_MainLayout.cshtml";
+}
+
+<div id="flex_box" class="text-center d-none">
+    <form id="form-send-reservation" class="mb-3">
+        <h1 class="h3 mb-3 fw-normal">Bike reservieren</h1>
+
+        <div class="alert alert-warning d-none" role="alert"></div>
+
+        <div class="alert alert-success alert-dismissible fade show d-none text-nowrap" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        <div class="form-floating">
+            <input id="floatingInput" class="form-control" type="datetime-local" name="startDate" />
+            <label for="floatingInput">Start-Zeit</label>
+        </div>
+        
+        <div class="form-floating">
+            <input id="floatingInput" class="form-control" type="datetime-local" name="endDate" />
+            <label for="floatingInput">End-Zeit</label>
+        </div>
+
+        <div class="form-floating">
+            <select class="form-select" name="appUserId" aria-label="Default select example" id="floatingInput">
+                <option></option>
+            </select>
+            <label for="floatingInput">Mieter</label>
+        </div>
+
+        <div class="form-floating">
+            <select class="form-select" name="bikeId" aria-label="Default select example" id="floatingInput">
+                <option></option>
+            </select>
+            <label for="floatingInput">Bike</label>
+        </div>
+
+        <button id="create_btn" class="w-100 btn btn-lg btn-primary" type="submit">reservieren</button>
+    </form>
+</div>
+
+<table class="table py-2 d-none table-bordered" id="reservations-table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start-Zeit</th>
+            <th scope="col">End-Zeit</th>
+            <th scope="col">Motorrad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="d-none table-row">
+            <td class="row-count"></td>
+            <td class="reservation-name"></td>
+            <td class="start-date"></td>
+            <td class="end-date"></td>
+            <td class="bike"></td>
+        </tr>
+    </tbody>
+</table>
+
+

@@ -1,9 +1,9 @@
 version: "3.7"
 
 services:
-  millenniumevent_api:
-    container_name: millenniumevent_api
-    hostname: millenniumevent_api
+  rentandride_api:
+    container_name: rentandride_api
+    hostname: rentandride_api
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,7 +11,7 @@ services:
 
     networks:
       default_network:
-        ipv4_address: 172.0.0.21
+        ipv4_address: 172.0.0.22
     
     environment:
         - APPSETTINGS="Data/appsettings.json"

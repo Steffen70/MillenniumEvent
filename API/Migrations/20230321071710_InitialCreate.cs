@@ -52,7 +52,6 @@ namespace API.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ReservationName = table.Column<string>(type: "text", nullable: true),
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     BikeId = table.Column<int>(type: "integer", nullable: false),
@@ -62,8 +61,8 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_Bikes_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Reservations_Bikes_BikeId",
+                        column: x => x.BikeId,
                         principalTable: "Bikes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -79,6 +78,11 @@ namespace API.Migrations
                 name: "IX_Reservations_AppUserId",
                 table: "Reservations",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_BikeId",
+                table: "Reservations",
+                column: "BikeId");
         }
 
         /// <inheritdoc />

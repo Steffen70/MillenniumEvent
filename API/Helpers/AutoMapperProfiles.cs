@@ -16,6 +16,9 @@ namespace API.Helpers
 
             CreateMap<BikeCreateDto, Bike>();
             CreateMap<Bike, BikeDto>();
+
+            CreateMap<ReservationCreateDto, Reservation>();
+            CreateMap<Reservation, ReservationListDto>();
         }
     }
 }

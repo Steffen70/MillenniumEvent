@@ -1,0 +1,15 @@
+[id^="form-"] select,
+[id^="form-"] .form-floating input:not([name="startDate"]) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+[id^="form-"] .form-floating #floatingInput:not([name="bikeId"]) {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+[id^="form-"] [name="bikeId"] {
+    margin-bottom: 10px;
+}

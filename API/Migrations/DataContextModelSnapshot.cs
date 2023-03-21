@@ -95,15 +95,14 @@ namespace API.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ReservationName")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("BikeId");
 
                     b.ToTable("Reservations");
                 });
@@ -118,7 +117,7 @@ namespace API.Migrations
 
                     b.HasOne("API.Entities.Bike", "Bike")
                         .WithMany("Reservations")
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("BikeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

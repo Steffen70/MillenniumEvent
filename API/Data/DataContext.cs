@@ -27,7 +27,7 @@ namespace API.Data
             builder.Entity<Reservation>()
                 .HasOne(r => r.Bike)
                 .WithMany(b => b.Reservations)
-                .HasForeignKey(r => r.AppUserId)
+                .HasForeignKey(r => r.BikeId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

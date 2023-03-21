@@ -67,34 +67,35 @@ function reloadTable() {
             method: "GET",
             headers: { "Authorization": "Bearer " + token }
         }).then(res => {
-        console.log(res);
+            console.log(res);
+            if (res.status === 204)
+                return;
+            else if (res.ok)
+                res.json().then(ticketList => {
+                    const tableRow = document.querySelector(".table-row");
+                    const parentNode = tableRow.parentNode;
 
-        if (res.ok)
-            res.json().then(ticketList => {
-                const tableRow = document.querySelector(".table-row");
-                const parentNode = tableRow.parentNode;
+                    let rowCount = 0;
 
-                let rowCount = 0;
+                    ticketList.forEach(t => {
+                        const trNew = tableRow.cloneNode(true);
 
-                ticketList.forEach(t => {
-                    const trNew = tableRow.cloneNode(true);
+                        trNew.classList.remove("d-none");
 
-                    trNew.classList.remove("d-none");
+                        rowCount++;
 
-                    rowCount++;
+                        trNew.querySelector(".brand").innerText = t.brand;
+                        trNew.querySelector(".model").innerText = t.model;
+                        trNew.querySelector(".year").innerText = t.year;
+                        trNew.querySelector(".category").innerText = t.category;
+                        trNew.querySelector(".row-count").innerText = rowCount;
 
-                    trNew.querySelector(".brand").innerText = t.brand;
-                    trNew.querySelector(".model").innerText = t.model;
-                    trNew.querySelector(".year").innerText = t.year;
-                    trNew.querySelector(".category").innerText = t.category;
-                    trNew.querySelector(".row-count").innerText = rowCount;
+                        parentNode.appendChild(trNew);
+                    });
 
-                    parentNode.appendChild(trNew);
+                    document.querySelector("#bikes-table").classList.remove("d-none");
                 });
-
-                document.querySelector("#bikes-table").classList.remove("d-none");
-            });
-    });
+        });
 }
 
 onLoad.push(() => {
