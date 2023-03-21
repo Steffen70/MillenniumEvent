@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<ApplicationIcon>millennium.ico</ApplicationIcon>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="wwwroot\Scripts\demo_module.js" />
+		<Content Remove="wwwroot\Images\rent-and-ride.png" />
+		<Content Remove="wwwroot\Scripts\demo_module.js" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -22,62 +22,21 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
-		<PackageReference Include="SkiaSharp" Version="2.88.3" />
-		<PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
-		<PackageReference Include="NETCore.MailKit" Version="2.1.0" />
-		<PackageReference Include="ZXing.Net" Version="0.16.9" />
-		<PackageReference Include="ZXing.Net.Bindings.SkiaSharp" Version="0.16.13" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Data\flyer_millennium.jpeg">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="Data\UserSeedData.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="Data\ViewNames.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Scripts\demo_module.js">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Scripts\_MainScript.js">
+		<None Include="Data\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="wwwroot\Scripts\tickets.js">
+		<None Include="wwwroot\Scripts\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="wwwroot\Scripts\scanner_html5-qrcode.min.js">
+		<None Include="wwwroot\Styles\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="wwwroot\Scripts\scanner.js">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Scripts\login.js">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Scripts\dashboard.js">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Styles\_main_stylesheet.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Styles\login.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Styles\login_tickets_dashboard.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Styles\scanner.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Styles\tickets_dashboard.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Include="wwwroot\Images\millennium.svg">
+		<None Include="wwwroot\Images\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Include="appsettings.json">

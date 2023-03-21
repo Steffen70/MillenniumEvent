@@ -28,7 +28,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @foreach (var viewName in new string[] { "Impressum", "Tickets", "Dashboard", "Scanner", "Demo" })
+                    @foreach (var viewName in new[] { "Impressum", "Mieter", "Demo" })
                     {
                         <li class="nav-item">
                             <a class="nav-link @(@Model.Title == @viewName ? "active" : "")" href="/?view=@viewName">@viewName</a>
@@ -46,7 +46,7 @@
 
     <div class="pt-2 text-center">
         <a href="/">
-            <img class="d-block mx-auto mb-2" src="@Href("~/Images/millennium.svg")" width="100%" height="120px">
+            <img class="d-block mx-auto my-4" src="@Href("~/Images/rent-and-ride.png")" width=auto height="120px">
         </a>
     </div>
 
@@ -61,7 +61,7 @@
 
     @foreach (var script in Model.Scripts)
     {
-        <script src="@Href($"~/Scripts/{script}")" @(script.Contains("module") ? Html.Raw("type = \"module\"") : "")></script>
+        <script src="@Href($"~/Scripts/{script}")" @(script.Contains("module") ? Html.Raw("type=\"module\"") : "")></script>
     }
 </body>
 

@@ -52,7 +52,7 @@ namespace API.Services
             using var hmac = new HMACSHA512();
             var admin = new AppUser
             {
-                Email = _apiSettings.Value.AdminEmail,
+                Username = _apiSettings.Value.AdminUsername,
                 PasswordHash = Convert.ToBase64String(hmac.ComputeHash(
                     Encoding.UTF8.GetBytes(_apiSettings.Value.AdminPassword))),
                 PasswordSalt = Convert.ToBase64String(hmac.Key),
@@ -66,7 +66,7 @@ namespace API.Services
 
         private async Task SeedUsersAsync()
         {
-            var userData = await File.ReadAllTextAsync(Path.Combine(".", "Data", "UserSeedData.json"));
+            var userData = await File.ReadAllTextAsync(Path.Combine(".", "Data", "EmployeeSeedData.json"));
             var registerDtos = JsonSerializer.Deserialize<List<RegisterDto>>(userData);
 
             if (registerDtos == null) return;
@@ -77,10 +77,10 @@ namespace API.Services
                 using var hmac = new HMACSHA512();
                 _context.Users.Add(new AppUser
                 {
-                    Email = r.Email.ToLower(),
+                    Username = r.Username.ToLower(),
                     PasswordHash = Convert.ToBase64String(hmac.ComputeHash(string.IsNullOrWhiteSpace(r.Password) ? defaultPassword : Encoding.UTF8.GetBytes(r.Password))),
                     PasswordSalt = Convert.ToBase64String(hmac.Key),
-                    UserRole = "Promoter"
+                    UserRole = "Employee"
                 });
             }
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,11 +12,6 @@ using API.Services;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using API.Entities;
-using Org.BouncyCastle.Crypto.Macs;
-using SkiaSharp;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 
 namespace API.Controllers
 {
@@ -31,8 +27,9 @@ namespace API.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
+            var loginRoles = new[] { "Admin", "Employee" };
             var user = await Context.Users
-                .SingleOrDefaultAsync(x => x.Email == loginDto.Email.ToLower());
+                .SingleOrDefaultAsync(x => loginRoles.Any(r => r == x.UserRole) &&  x.Username == loginDto.Username.ToLower());
 
             if (user is null) return Unauthorized("Invalid Email");
 
@@ -48,37 +45,34 @@ namespace API.Controllers
             return Mapper.Map(user, userDto);
         }
 
-        [Authorize(Policy = "RequireAdminRole")]
+        [Authorize(Policy = "RequireEmployeeRole")]
         [HttpPost("Create")]
-        public ActionResult<string> Create([FromQuery] string email)
+        public ActionResult/*<string>*/ Create([FromQuery] string username)
         {
-            var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (!regex.Match(email).Success)
+            if (string.IsNullOrWhiteSpace(username) ||  username.Contains(' '))
                 return BadRequest();
 
-            if (Context.Users.Any(u => u.Email == email))
+            if (Context.Users.Any(u => u.Username == username))
                 return StatusCode(208);
 
-            using var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Add("User-Agent", "C# program");
-            var response = client.GetStringAsync($"https://www.dinopass.com/password/simple").ConfigureAwait(true);
-
-            var password = response.GetAwaiter().GetResult();
-
-            if (string.IsNullOrWhiteSpace(password)) return StatusCode(418);
-
-            using var hmac = new HMACSHA512();
             Context.Users.Add(new AppUser
             {
-                Email = email.ToLower(),
-                PasswordHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(password))),
-                PasswordSalt = Convert.ToBase64String(hmac.Key),
-                UserRole = "Promoter"
+                Username = username.ToLower(),
+                UserRole = "User"
             });
 
             Context.SaveChanges();
-            return password;
+
+            return Ok();
+        }
+
+        [Authorize(Policy = "RequireEmployeeRole")]
+        [HttpGet("List")]
+        public async Task<ActionResult<IEnumerable<UserListDto>>> List()
+        {
+            var list = await Context.Users.OrderBy(u => u.UserRole).ToListAsync();
+            var userListDtoList = Mapper.Map<IEnumerable<UserListDto>>(list);
+            return Ok(userListDtoList);
         }
     }
 }

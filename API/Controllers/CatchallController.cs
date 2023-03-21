@@ -18,13 +18,11 @@ namespace API.Controllers
     public class CatchallController : Controller
     {
         private readonly IWebHostEnvironment _environment;
-        private readonly IOptions<ApiSettings> _apiSettings;
         private readonly ViewListService _viewListService;
 
-        public CatchallController(IWebHostEnvironment environment, IOptions<ApiSettings> apiSettings, ViewListService viewListService)
+        public CatchallController(IWebHostEnvironment environment, ViewListService viewListService)
         {
             _environment = environment;
-            _apiSettings = apiSettings;
             _viewListService = viewListService;
         }
 

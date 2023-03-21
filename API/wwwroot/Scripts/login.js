@@ -20,7 +20,7 @@ function login(userDto) {
                 setCurrentUser(body);
                 console.log(getUser());
 
-                const url = window.location.href.split("?")[0] + "?view=Tickets";
+                const url = window.location.href.split("?")[0] + "?view=Dashboard";
                 window.location.href = url;
             });
 

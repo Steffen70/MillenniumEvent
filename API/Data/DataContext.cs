@@ -7,7 +7,8 @@ namespace API.Data
     public class DataContext : DbContext
     {
         public DbSet<AppUser> Users { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Bike> Bikes { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         public DataContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder builder)
@@ -16,10 +17,17 @@ namespace API.Data
 
             //Write Fluent API configurations here
 
-            builder.Entity<Ticket>()
+            builder.Entity<Reservation>()
                 .HasOne(t => t.AppUser)
-                .WithMany(u => u.Tickets)
+                .WithMany(u => u.Reservations)
                 .HasForeignKey(t => t.AppUserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Reservation>()
+                .HasOne(r => r.Bike)
+                .WithMany(b => b.Reservations)
+                .HasForeignKey(r => r.AppUserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

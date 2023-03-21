@@ -3,8 +3,8 @@
 }
 
 <div id="flex_box" class="text-center d-none">
-    <form id="form-send-ticket" class="mb-3">
-        <h1 class="h3 mb-3 fw-normal">Promoter erstellen</h1>
+    <form id="form-send-user" class="mb-3">
+        <h1 class="h3 mb-3 fw-normal">Mieter erstellen</h1>
 
         <div class="alert alert-warning d-none" role="alert"></div>
 
@@ -13,33 +13,27 @@
         </div>
 
         <div class="form-floating">
-            <input type="email" name="email" class="form-control" id="floatingInput">
-            <label for="floatingInput">Email Adresse</label>
+            <input type="text" name="username" class="form-control" id="floatingInput">
+            <label for="floatingInput">Benutzername</label>
         </div>
 
         <button id="create_btn" class="w-100 btn btn-lg btn-primary" type="submit">erstellen</button>
     </form>
 </div>
 
-<table class="table py-2 d-none" id="tickets-table">
+<table class="table py-2 d-none table-bordered" id="users-table">
     <thead>
         <tr>
-            <th scope="col">Ticket</th>
-            <th scope="col">Promoter</th>
-            <th scope="col">Count</th>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">User Role</th>
         </tr>
     </thead>
     <tbody>
         <tr class="d-none table-row">
-            <td class="ticket-mail"></td>
-            <td class="promoter-mail"></td>
-            <td class="ticket-count"></td>
-        </tr>
-
-        <tr>
-            <td><b>Summe</b></td>
-            <td></td>
-            <td class="ticket-sum"></td>
+            <td class="row-count"></td>
+            <td class="username"></td>
+            <td class="user-role"></td>
         </tr>
     </tbody>
 </table>

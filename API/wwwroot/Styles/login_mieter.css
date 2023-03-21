@@ -10,10 +10,6 @@ div#flex_box {
     margin: auto;
 }
 
-    [id^="form-"] .checkbox {
-        font-weight: 400;
-    }
-
     [id^="form-"] .form-floating:focus-within {
         z-index: 2;
     }

@@ -24,8 +24,6 @@ namespace API.Extensions
             services.AddScoped<TokenService>();
             services.AddScoped<LogUserActivity>();
 
-            services.AddScoped<EmailService>();
-
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddDbContext(out apiSettings);
