@@ -47,7 +47,7 @@ namespace API.Controllers
 
         [Authorize(Policy = "RequireEmployeeRole")]
         [HttpPost("Create")]
-        public ActionResult/*<string>*/ Create([FromQuery] string username)
+        public ActionResult Create([FromQuery] string username)
         {
             if (string.IsNullOrWhiteSpace(username) ||  username.Contains(' '))
                 return BadRequest();
@@ -70,6 +70,9 @@ namespace API.Controllers
         [HttpGet("List")]
         public async Task<ActionResult<IEnumerable<UserListDto>>> List()
         {
+            if (!Context.Users.Any())
+                return NoContent();
+
             var list = await Context.Users.OrderBy(u => u.UserRole).ToListAsync();
             var userListDtoList = Mapper.Map<IEnumerable<UserListDto>>(list);
             return Ok(userListDtoList);

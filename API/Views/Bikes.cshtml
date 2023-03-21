@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/_MainLayout.cshtml";
+}
+
+<div id="flex_box" class="text-center d-none">
+    <form id="form-send-bike" class="mb-3">
+        <h1 class="h3 mb-3 fw-normal">Bike erfassen</h1>
+
+        <div class="alert alert-warning d-none" role="alert"></div>
+
+        <div class="alert alert-success alert-dismissible fade show d-none text-nowrap" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" name="brand" class="form-control" id="floatingInput">
+            <label for="floatingInput">Marke</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" name="model" class="form-control" id="floatingInput">
+            <label for="floatingInput">Typ</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" name="year" class="form-control" id="floatingInput">
+            <label for="floatingInput">Modeljahr</label>
+        </div>
+
+        <div class="form-floating">
+            <select class="form-select" name="category" aria-label="Default select example" id="floatingInput">
+                <option selected value="0">Unbeschränkt</option>
+                <option value="1">35kW</option>
+                <option value="2">11kW</option>
+            </select>
+            <label for="floatingInput">Kategorie</label>
+        </div>
+
+        <button id="create_btn" class="w-100 btn btn-lg btn-primary" type="submit">erfassen</button>
+    </form>
+</div>
+
+<table class="table py-2 d-none table-bordered" id="bikes-table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Marke</th>
+            <th scope="col">Typ</th>
+            <th scope="col">Modeljahr</th>
+            <th scope="col">Kategorie</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="d-none table-row">
+            <td class="row-count"></td>
+            <td class="brand"></td>
+            <td class="model"></td>
+            <td class="year"></td>
+            <td class="category"></td>
+        </tr>
+    </tbody>
+</table>
+
+

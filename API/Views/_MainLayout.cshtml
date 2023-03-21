@@ -28,7 +28,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @foreach (var viewName in new[] { "Impressum", "Mieter", "Demo" })
+                    @foreach (var viewName in new[] { "Impressum", "Mieter", "Bikes", "Demo" })
                     {
                         <li class="nav-item">
                             <a class="nav-link @(@Model.Title == @viewName ? "active" : "")" href="/?view=@viewName">@viewName</a>

@@ -6,11 +6,11 @@ namespace API.Entities
 {
     public enum Category
     {
-        [Description("Kategorie A: Unbeschränkt")]
+        [Description("A: Unbeschränkt")]
         A,
-        [Description("Kategorie -A: bis 35kW")]
+        [Description("-A: bis 35kW")]
         ABeschraenkt,
-        [Description("Kategorie A1: bis 11kW")]
+        [Description("A1: bis 11kW")]
         A1
     }
 
@@ -23,5 +23,10 @@ namespace API.Entities
         public Category Category { get; set; }
 
         public List<Reservation> Reservations { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Year} {Brand} {Model}";
+        }
     }
 }

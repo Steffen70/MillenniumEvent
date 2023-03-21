@@ -7,7 +7,10 @@
 
 	<ItemGroup>
 		<Content Remove="wwwroot\Images\rent-and-ride.png" />
+		<Content Remove="wwwroot\Scripts\bikes.js" />
 		<Content Remove="wwwroot\Scripts\demo_module.js" />
+		<Content Remove="wwwroot\Styles\bikes.css" />
+		<Content Remove="wwwroot\Styles\login_bikes.css" />
 	</ItemGroup>
 
 	<ItemGroup>

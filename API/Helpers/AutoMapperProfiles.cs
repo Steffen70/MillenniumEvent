@@ -12,8 +12,10 @@ namespace API.Helpers
 
             CreateMap<AppUser, UserDto>();
             CreateMap<AppUser, UserAdminDto>();
-
             CreateMap<AppUser, UserListDto>();
+
+            CreateMap<BikeCreateDto, Bike>();
+            CreateMap<Bike, BikeDto>();
         }
     }
 }

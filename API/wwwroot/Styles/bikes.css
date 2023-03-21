@@ -1,0 +1,9 @@
+[id^="form-"] select,
+[id^="form-"] .form-floating input:not([name="brand"]) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+[id^="form-"] select {
+    margin-bottom: 10px;
+}
