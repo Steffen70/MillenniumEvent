@@ -1,4 +1,4 @@
-# Millennium Event Ticket Generator Site
+# Demo Application: Motorcycle Renting Platform based on Millennium Ticket Generator Site
 
 ## Config
 
@@ -8,18 +8,10 @@ Add the following configuration to the appsettings.json or create matching envir
 {
     "ApiSettings":  {
         "ConnectionString": "MySql_ConnectionString",
-        "AdminEmail": "email",
+        "AdminUsername": "email",
         "AdminPassword": "password",
         "DefaultPassword": "password",
-        "TokenKey": "GUID",
-        "FlyerImageName": "base flyer.png name in data directory",
-        "EmailConfiguration": {
-            "From": "email address",
-            "SmtpServer": "smtp.gmail.com",
-            "Port": 465,
-            "Username": "email address",
-            "Password": "email password"
-        }
+        "TokenKey": "GUID"
     }
 }
 ```
